@@ -1,6 +1,6 @@
-# {{FRIENDLY_NAME}}
+# Serializable predicate
 
-{{DESCRIPTION}}
+Serializable classes to define predicates in the Unity inspector, based on other objects values
 
 ## License
 

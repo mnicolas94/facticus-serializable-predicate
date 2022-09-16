@@ -1,20 +1,20 @@
 {
-  "name": "com.{{COMPANY}}.{{REPOSITORY_NAME}}",
+  "name": "com.facticus.serializable-predicate",
   "version": "0.1.0",
-  "displayName": "{{FRIENDLY_NAME}}",
-  "description": "{{DESCRIPTION}}",
-  "unity": "{{UNITY_VERSION}}",
+  "displayName": "Serializable predicate",
+  "description": "Serializable classes to define predicates in the Unity inspector, based on other objects values",
+  "unity": "2021.3",
   "unityRelease": "",
   "dependencies": {},
   "keywords": [],
   "author": {
-    "name": "{{COMPANY_FRIENDLY_NAME}}",
-    "email": "{{REPORT_EMAIL}}",
-    "url": "{{COMPANY_WEBSITE}}"
+    "name": "Facticus",
+    "email": "",
+    "url": ""
   },
   "repository": {
     "type": "git",
-    "url": "{{GIT_REPOSITORY}}"
+    "url": "https://github.com/mnicolas94/facticus-serializable-predicate.git"
   },
   "license": "MIT"
 }

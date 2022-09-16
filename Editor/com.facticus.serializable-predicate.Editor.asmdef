@@ -1,6 +1,10 @@
 {
-    "name": "com.{{COMPANY}}.{{REPOSITORY_NAME}}.Editor",
-    "references": [],
+    "name": "com.facticus.serializable-predicate.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:4aacf4ad2c5335449beb48d6d9ec2f78",
+        "GUID:87f0d0b9a8d159a4c94e89b339e4604a"
+    ],
     "includePlatforms": [
         "Editor"
     ],
