@@ -54,7 +54,21 @@ namespace SerializablePredicate.Editor
                 
                     DrawNegationToggle(negatedRect, property, fieldType);
                 }
+                else
+                {
+                    DrawWarningIcon(position);
+                }
             }
+        }
+
+        private static void DrawWarningIcon(Rect position)
+        {
+            var builtinIcon = EditorGUIUtility.IconContent("console.warnicon.sml");
+            var warningContent = new GUIContent(builtinIcon.image, "Can't find this field");
+            var iconPosition = position;
+            iconPosition.size = GUIStyle.none.CalcSize(warningContent);
+            iconPosition.x -= iconPosition.size.x;
+            GUI.Label(iconPosition, warningContent);
         }
 
         private static void DrawNegationToggle(Rect negatedRect, SerializedProperty property, Type fieldType)
