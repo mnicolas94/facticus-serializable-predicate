@@ -1,6 +1,6 @@
 {
   "name": "com.facticus.serializable-predicate",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "displayName": "Serializable predicate",
   "description": "Serializable classes to define predicates in the Unity inspector, based on other objects values",
   "unity": "2021.3",
