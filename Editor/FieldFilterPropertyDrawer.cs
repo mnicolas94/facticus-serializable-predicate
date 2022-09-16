@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using TypePredicate;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -49,9 +48,8 @@ namespace SerializablePredicate.Editor
                 {
                     DrawFunctionsDropdown(property, functionRect, fieldType);
                 
-                    var valueProperty = GetValuePropertyFromTypeAndComparison(property, fieldType, filter.predicateEnum);
-                    EditorGUI.PropertyField(valueRect, valueProperty, new GUIContent(""));
-                
+                    DrawValueToCompare(property, fieldType, filter, valueRect);
+
                     DrawNegationToggle(negatedRect, property, fieldType);
                 }
                 else
@@ -59,6 +57,13 @@ namespace SerializablePredicate.Editor
                     DrawWarningIcon(position);
                 }
             }
+        }
+
+        private void DrawValueToCompare(SerializedProperty property, Type fieldType, FieldFilterBase filter, Rect valueRect)
+        {
+            var valueProperty = GetValuePropertyFromTypeAndComparison(property, fieldType, filter.predicateEnum);
+            SetValueToCompareTypeFromTypeAndComparison(property, fieldType, filter.predicateEnum);
+            EditorGUI.PropertyField(valueRect, valueProperty, new GUIContent(""));
         }
 
         private static void DrawWarningIcon(Rect position)
@@ -194,6 +199,45 @@ namespace SerializablePredicate.Editor
             }
 
             return null;
+        }
+        
+        private void SetValueToCompareTypeFromTypeAndComparison(
+            SerializedProperty property,
+            Type fieldType,
+            ComparisonEnum comparison)
+        {
+            var typeProperty = property.FindPropertyRelative("valueToCompare.argType");
+
+            if (typeof(bool).IsAssignableFrom(fieldType))
+            {
+                typeProperty.enumValueIndex = (int) Arg.ArgType.Bool;
+            }
+            else if (typeof(int).IsAssignableFrom(fieldType))
+            {
+                typeProperty.enumValueIndex = (int) Arg.ArgType.Int;
+            }
+            else if (typeof(float).IsAssignableFrom(fieldType))
+            {
+                typeProperty.enumValueIndex = (int) Arg.ArgType.Float;
+            }
+            else if (typeof(string).IsAssignableFrom(fieldType))
+            {
+                typeProperty.enumValueIndex = (int) Arg.ArgType.String;
+            }
+            else if (typeof(IList).IsAssignableFrom(fieldType))
+            {
+                var genericType = fieldType.GenericTypeArguments[0];
+                SetValueToCompareTypeFromTypeAndComparison(property, genericType, comparison);
+            }
+            else if (typeof(Object).IsAssignableFrom(fieldType))
+            {
+                typeProperty.enumValueIndex = (int) Arg.ArgType.Object;
+            }
+            else
+            {
+                typeProperty.enumValueIndex = (int) Arg.ArgType.Unsupported;
+                property.serializedObject.ApplyModifiedProperties();
+            }
         }
     }
 }

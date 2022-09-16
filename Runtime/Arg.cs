@@ -1,7 +1,7 @@
-﻿﻿using System;
+﻿using System;
 using Object = UnityEngine.Object;
 
-namespace TypePredicate
+namespace SerializablePredicate
 {
     /// <summary>
     /// source: https://github.com/Siccity/SerializableCallback/blob/master/Runtime/SerializableCallbackBase.cs
